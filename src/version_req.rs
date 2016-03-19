@@ -926,6 +926,13 @@ mod test {
     }
 
     #[test]
+    pub fn test_le_partial() {
+        let r = req("<= 0.5");
+        assert_match(&r, &["0.4.0", "0.5.0", "0.5.9"]);
+        assert_not_match(&r, &["0.6.0", "1.0.0"]);
+    }
+
+    #[test]
     pub fn test_multiple() {
         let r = req("> 0.0.9, <= 2.5.3");
         assert_eq!(r.to_string(), "> 0.0.9, <= 2.5.3".to_string());
